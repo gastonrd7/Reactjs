@@ -6,9 +6,22 @@ import './App.css';
 class App extends Component {
   constructor(){
     super();
-    //this.state = {
-    //  user
-    //};
+    this.state = {
+      //user = null
+    };
+
+    this.handleAuth = this.handleAuth.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  //componente de cicloo de vida, se dispara una vez el componenete es renderizado en el cliente
+  componentWillMount (){
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({
+        //user: user ...si la clave y el valor son iguales, lo escribimos una unica vez
+        user
+      });
+    });
   }
 
   handleAuth(){
@@ -19,17 +32,24 @@ class App extends Component {
     .catch(error => console.log(`${error.code}: ${error.message}`));
   }
 
+  handleLogout() {
+    firebase.auth().signOut()
+    .then(result => console.log(`El usuario ha salido`))
+    .catch(error => console.log(`${error.code}: ${error.message}`));
+  }
+
   renderLoginButton(){
-    //Si esta logueado hace algo
-    //if (this.state.user){
-    //  return (
-    //    min 19.20 del segundo video
-    //  );
-    //}
-
-
-
-    //Si no lo esta hace otra
+    if (this.state.user){
+      return (
+       <div> 
+         <img width="100" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+         <p>Hola {this.state.user.displayName} </p> 
+         <button onClick={this.handleLogout}>Salir</button>
+       </div>
+      );
+    } else {
+      return (<button onClick={this.handleAuth}>Login con google</button>);
+    }
   }
 
   render() {
@@ -40,7 +60,7 @@ class App extends Component {
           <h1 className="App-title">Pseudogram</h1>
         </header>
         <p className="App-intro">
-          <button onClick={this.handleAuth}>Login con Google</button>
+          { this.renderLoginButton() }
         </p>
       </div>
     );
