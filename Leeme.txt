@@ -1,0 +1,29 @@
+FireBase
+Subida de archivos (imagenes)
+Subida de registros.
+
+Comandos para iniciar el microServer e instalar node.js
+1)Comprobar version de node: 
+node -v
+
+//nodejs.org, el descargas descargartela
+
+2)Generador de aplicaciones de react de forma global (-g):
+cambiar de disco C: o E: --- cd "xxx" donde querramos generarlo
+Esto genera los paquetes (la palntilla de cualquier aplicacion que creeemos)
+npm install -g create-react-app
+
+3) Para generar realmente nuestra aplicacion ponemos el create-react-app y luego el nombre de nuestra aplicacion:
+create-react-app pseudogram
+
+Con visualStudio Code abri el directorio.
+Para iniciar el microServidor local ir a "cd pseudogram" y luego:
+npm start
+-----------------------------------------------------------------
+https://firebase.google.com/
+Luego de crear una BD para nuestra aplicacion WEB...
+Instalar firebase en nuestro directorio de la aplciacion, asi nos lo agrega como paquete a nuestro proyecto.
+npm install --save firebase
+
+Documentacion de firebase autenticacion : https://firebase.google.com/docs/auth/users?authuser=0
+
