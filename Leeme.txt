@@ -27,3 +27,8 @@ npm install --save firebase
 
 Documentacion de firebase autenticacion : https://firebase.google.com/docs/auth/users?authuser=0
 
+En el directorio creado poner
+npm init
+npm install --save-dev (dependencias del entorno de desarrollo)
+npm install --save (dependencias del proyecto unicamente)
+npm install --save-dev webpack webpack-dev-server
