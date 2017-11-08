@@ -44,6 +44,8 @@ npm uninstall --save webpack
 npm install --save-dev  webpack@2 (nosotros sin especificar la version)
 npm install --save-dev html-webpack-plugin
 npm install --save-dev extract-text-webpack-plugin
+npm install --save-dev normalize-css
+npm install --save-dev moment
 
 
 instalar para el chrome en https://chrome.google.com/webstore/category/extensions?hl=es-419 reac revtools
