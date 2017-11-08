@@ -1,0 +1,9 @@
+//Este fichero es leido cuando en webpack.config 
+// se lea la configuracion loaders y quiera levantar babel,
+//aca se indica cual de todos los babel
+{
+    "presets": [
+        "latest",
+        "react"
+    ]
+}
