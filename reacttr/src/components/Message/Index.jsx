@@ -17,7 +17,7 @@ class Message extends Component {
                     </figure>
                     <span className={styles.displayName}>{this.props.displayName} </span>
                     <span className={styles.username}>{this.props.username} </span>
-                    <span className={styles.date}>{this.props.dateFormat} </span>
+                    <span className={styles.date}>{dateFormat} </span>
                 </div>
                 <h3>{this.props.text}</h3>
                 <div className={styles.buttons}>

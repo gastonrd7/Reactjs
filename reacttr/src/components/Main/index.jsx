@@ -18,7 +18,14 @@ class Main extends Component {
                            picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
                            displayName: 'Gastiiii',
                            username: 'gastonrd7',
-                           date: Date.now()
+                           date: Date.now() - 180000
+                        },
+                         {
+                           text: 'Este es  un nuevo Mensaje',
+                           picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
+                           displayName: 'Gastiiii',
+                           username: 'gastonrd7',
+                           date: Date.now() - 100000
                         }
                    ]
         }
