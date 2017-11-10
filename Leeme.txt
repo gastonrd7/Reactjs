@@ -47,6 +47,8 @@ npm install --save-dev extract-text-webpack-plugin
 npm install --save-dev normalize-css
 npm install --save-dev moment
 
+npm install --save uuid (cuando react maneja listas pide que se cargue la key del elemento, esta libreria genera key aleatorios)
+
 
 instalar para el chrome en https://chrome.google.com/webstore/category/extensions?hl=es-419 reac revtools
 Esto muestra ma maquetacion en vase a ECMAScript6

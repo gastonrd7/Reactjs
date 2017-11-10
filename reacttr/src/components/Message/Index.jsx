@@ -5,7 +5,28 @@ import moment from 'moment'
 class Message extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            pressFavorite: false,
+            pressRetweet: false
+        }
+
+        this.onPressReweet = this.onPressReweet.bind(this)
+        this.onPressFavorite = this.onPressFavorite.bind(this)
     };
+
+    onPressFavorite(){
+        this.props.onFavorite()
+        this.setState({
+            pressFavorite: true
+        })
+    }
+
+    onPressReweet(){
+        this.props.onReweet()
+        this.setState({
+            pressRetweet: true
+        })
+    }
 
     render () {
         let dateFormat = moment(this.props.date).fromNow()
@@ -22,8 +43,20 @@ class Message extends Component {
                 <h3>{this.props.text}</h3>
                 <div className={styles.buttons}>
                     <div className={styles.icon}><span className='fa fa-reply'></span></div>
-                    <div className={styles.icon}><span className='fa fa-retweet'></span></div>
-                    <div className={styles.icon}><span className='fa fa-star-o'></span></div>
+                    <div 
+                        className={(this.state.pressRetweet) ? styles.rtGreen : ''}
+                        onClick={this.onPressReweet}
+                    >
+                        <span className='fa fa-retweet'></span>
+                        <span className={styles.num}>{this.props.numRetweets}</span>
+                     </div>
+                    <div 
+                        className={(this.state.pressFavorite) ? styles.favYellow : ''}
+                        onClick={this.onPressFavorite}
+                    >
+                        <span className='fa fa-star-o'></span>
+                        <span className={styles.num}>{this.props.numFavorites}</span>
+                    </div>
                 </div>
             </div>
         )
