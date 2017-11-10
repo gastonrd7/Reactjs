@@ -21,6 +21,7 @@ class Main extends Component {
             //pero tambien podemos copiar el objeto que nos inyectan y añadirle cosas
             user: Object.assign({}, this.props.user, {retweets: []}, {favorites: []}),
             openText: false,
+            userNameToReply: '',
             messages: [
                        {
                            id: uuid.v4(),
@@ -50,6 +51,7 @@ class Main extends Component {
         this.handleOpenText = this.handleOpenText.bind(this)
         this.handleRetweet = this.handleRetweet.bind(this)
         this.handleFavorite = this.handleFavorite.bind(this)
+        this.handleReplyTweet = this.handleReplyTweet.bind(this)
     }
 
     handleSendText (event) {
@@ -61,7 +63,9 @@ class Main extends Component {
                 displayName: this.props.user.displayName,
                 picture: this.props.user.photoURL,
                 date: Date.now(),
-                text: event.target.text.value
+                text: event.target.text.value,
+                retweets: 0,
+                favorites: 0
             }
 
             this.setState({
@@ -69,23 +73,27 @@ class Main extends Component {
                 //usar redax debemos hacerlo con concat
                 //messasges: messages.push(newMessage)
                  messages: this.state.messages.concat([newMessage]),
-                 openText: false
+                 openText: false,
+                 userNameToReply: ''
             })
         }
 
     handleCloseText (event) {
             event.preventDefault()
-            this.setState( {openText: false} )
+            this.setState( {openText: false, userNameToReply : ''} )
         }
 
     handleOpenText (event) {
             event.preventDefault()
             //al cambiar openText a true, y esta propiedad esta en estado del 
             //componente, forzamos el metodo render nuevamente a ejecutarse
-            this.setState({ openText: true })
+            this.setState({ 
+                openText: true
+            })
+
         }
     
-    handleRetweet (event) {
+    handleRetweet (msgId) {
             console.log('llego')
              let alreadyRetweet = this.state.user.retweets.filter(rt => rt == msgId)
             if(alreadyRetweet.length == 0){
@@ -136,11 +144,19 @@ class Main extends Component {
             return (
                 <InputText
                     onSendText={this.handleSendText}
-                    onCloseText={this.handleCloseText} 
+                    onCloseText={this.handleCloseText}
+                    userNameToReply={this.state.userNameToReply} 
                 />
             )
         }
-    }    
+    }
+    
+    handleReplyTweet(msgId, userNameToReply){
+        this.setState({
+            openText: true,
+            userNameToReply: userNameToReply          
+        })
+    }
     
     render () {
         return (
@@ -161,6 +177,7 @@ class Main extends Component {
                     messages={this.state.messages}
                     onRetweet={this.handleRetweet}
                     onFavorite={this.handleFavorite}
+                    onReplyTweet={this.handleReplyTweet}
                 />
             </div>
         )

@@ -22,7 +22,7 @@ class Message extends Component {
     }
 
     onPressReweet(){
-        this.props.onReweet()
+        this.props.onRetweet()
         this.setState({
             pressRetweet: true
         })
@@ -42,7 +42,12 @@ class Message extends Component {
                 </div>
                 <h3>{this.props.text}</h3>
                 <div className={styles.buttons}>
-                    <div className={styles.icon}><span className='fa fa-reply'></span></div>
+                    <div 
+                        className={styles.icon}
+                        onClick={this.props.onReplyTweet}
+                    >
+                        <span className='fa fa-reply'></span>
+                    </div>
                     <div 
                         className={(this.state.pressRetweet) ? styles.rtGreen : ''}
                         onClick={this.onPressReweet}

@@ -9,7 +9,9 @@ class InputText extends Component {
             //como necesito modificar el estado de la clase padre
             //el manejador del evento onSendText estara en la clase padre, no en esta
             <form className={styles.form} onSubmit={this.props.onSendText}>
-                <textarea className={styles.text} name="text" ></ textarea>
+                <textarea className={styles.text} name="text" >
+                    {(this.props.userNameToReply) ? `@${this.props.userNameToReply} ` : '' }
+                </ textarea>
                 <div className={styles.buttons}>
                     <button className={styles.close} onClick={this.props.onCloseText}>Cerrar</button>
                     <button className={styles.send} type="submit">Enviar</button>

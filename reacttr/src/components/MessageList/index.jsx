@@ -28,6 +28,7 @@ class MessageList extends Component {
                             // para pasarle como parametro msj.id al onRetweet
                             onRetweet={() => this.props.onRetweet(msg.id)}
                             onFavorite={() => this.props.onFavorite(msg.id)}
+                            onReplyTweet={() => this.props.onReplyTweet(msg.id, msg.username)}
                         />
                     )
                 } ).reverse()}
