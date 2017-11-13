@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+//import { HashRouter, Match } from 'react-router'
+import { Switch, BrowserRouter as Router } from 'react-router-dom'
 import 'normalize-css'
 import styles from './app.css'
 import Header from '../Header'
@@ -17,10 +19,35 @@ class App extends Component{
     }
     render () {
         return (
-            <div>
-                <Header />
-                <Main user={this.state.user} />
-            </div>
+            <Router>
+                <div>
+                    https://reacttraining.com/react-router/web/example/route-config
+                </div>
+            </Router>
+            // <HashRouter>
+            //     <div>
+            //         <Header />
+                    
+            //         <Match exactly pattern='/' render={() => {
+            //             if (this.state.user){
+            //                 return (
+            //                     <Main user={this.state.user} />
+            //                 )
+            //             } else {
+            //                 // render <login />
+            //             }
+            //         }} />
+
+            //         <Match pattern='/profile' render={() => {
+            //             //render <profile />
+            //         }} />
+
+            //         <Match pattern='/user/:username' render={({ params }) => {
+            //             //render <profile /> pasando params.username
+            //         }} />
+                    
+            //     </div>
+            // </ HashRouter>
         )
     }
 }

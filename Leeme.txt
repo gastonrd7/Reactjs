@@ -49,6 +49,8 @@ npm install --save-dev moment
 
 npm install --save uuid (cuando react maneja listas pide que se cargue la key del elemento, esta libreria genera key aleatorios)
 npm install --save redux
+--npm install --save react-router@4.0.0-alpha.4
+npm install --save react-router
 
 
 instalar para el chrome en https://chrome.google.com/webstore/category/extensions?hl=es-419 reac revtools
