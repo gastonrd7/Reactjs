@@ -118,6 +118,7 @@ class Main extends Component {
         }
     
     handleFavorite (msgId) {
+        console.log('llego')
             let alreadyFavorite = this.state.user.favorites.filter(fav => fav == msgId)
             if(alreadyFavorite.length == 0){
                 let messages = this.state.messages.map(msg => {
