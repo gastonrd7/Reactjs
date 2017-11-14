@@ -10,7 +10,7 @@ class Profile extends Component {
                 <span className={styles.name}>
                     {this.props.displayName}
                 </span>
-                <ul>
+                <ul className={styles.data}>
                      <li>
                         <span className='fa fa-user'>
                             {this.props.username}
@@ -22,7 +22,7 @@ class Profile extends Component {
                         </span>
                      </li>
                      <li>
-                        <span className='fa fa-map-market'>
+                        <span className='fa fa-map-marker'>
                             {this.props.location}
                         </span>
                      </li>

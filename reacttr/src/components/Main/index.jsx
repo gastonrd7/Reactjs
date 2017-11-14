@@ -94,7 +94,6 @@ class Main extends Component {
         }
     
     handleRetweet (msgId) {
-            console.log('llego')
              let alreadyRetweet = this.state.user.retweets.filter(rt => rt == msgId)
             if(alreadyRetweet.length == 0){
                 let messages = this.state.messages.map(msg => {
@@ -118,7 +117,6 @@ class Main extends Component {
         }
     
     handleFavorite (msgId) {
-        console.log('llego')
             let alreadyFavorite = this.state.user.favorites.filter(fav => fav == msgId)
             if(alreadyFavorite.length == 0){
                 let messages = this.state.messages.map(msg => {

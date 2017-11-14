@@ -15,7 +15,8 @@ class App extends Component{
             user: {
                 photoURL: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
                 email: 'gaston.rd7@gmail.com',
-                displayName: 'Gaston Ruiz Diaz'
+                displayName: 'Gaston Ruiz Diaz',
+                location: 'Buenos Aires, Argentina'
             }
         }
     }
@@ -47,7 +48,7 @@ class App extends Component{
                             return (
                                     <Profile 
                                         picture={this.state.user.photoURL}
-                                        email={this.state.user.email.split('@')[0]}
+                                        username={this.state.user.email.split('@')[0]}
                                         displayName={this.state.user.displayName}
                                         location={this.state.user.location}
                                         emailAddress={this.state.user.email}
@@ -56,7 +57,14 @@ class App extends Component{
                         }} />
 
                         <Route path='/user/:username' render={({ params }) => {
-                            //render <profile /> pasando params.username
+                            return (
+                                    <Profile 
+                                        //username={params.username}
+                                        displayName={username}
+                                        //displayName='hola'
+                                        //emailAddress={params.username}
+                                    />
+                                )
                         }} />
                     </Switch>
                     

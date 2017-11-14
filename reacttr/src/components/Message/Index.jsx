@@ -6,15 +6,36 @@ import { Link } from 'react-router-dom'
 class Message extends Component {
     constructor(props) {
         super(props)
-        
+        this.state = {
+            pressFavorite: false,
+            pressRetweet: false
+        }
+
+        this.onPressReweet = this.onPressReweet.bind(this)
+        this.onPressFavorite = this.onPressFavorite.bind(this)
     };
+
+    onPressFavorite(){
+        this.props.onFavorite()
+        this.setState({
+            pressFavorite: true
+        })
+    }
+
+    onPressReweet(){
+        this.props.onRetweet()
+        this.setState({
+            pressRetweet: true
+        })
+    }
 
     render () {
         let dateFormat = moment(this.props.date).fromNow()
+        let userLink = `/user/${this.props.username}`
         return (
             <div className={styles.root}>
                 <div className={styles.user}>
-                    <Link to='/profile'>
+                    <Link to={userLink}> 
                         <figure>
                             <img className={styles.avatar} src={this.props.picture} />
                         </figure>
@@ -32,15 +53,15 @@ class Message extends Component {
                         <span className='fa fa-reply'></span>
                     </div>
                     <div 
-                        className={styles.icon}
-                        onClick={this.props.onPressReweet}
+                        className={(this.state.pressRetweet) ? styles.rtGreen : ''}
+                        onClick={this.onPressReweet}
                     >
                         <span className='fa fa-retweet'></span>
                         <span className={styles.num}>{this.props.numRetweets}</span>
                      </div>
                     <div 
-                        className={styles.icon}
-                        onClick={this.props.onPressFavorite}
+                        className={(this.state.pressFavorite) ? styles.favYellow : ''}
+                        onClick={this.onPressFavorite}
                     >
                         <span className='fa fa-star-o'></span>
                         <span className={styles.num}>{this.props.numFavorites}</span>
