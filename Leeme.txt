@@ -53,5 +53,6 @@ npm install --save redux
 npm install --save react-router
 
 
+
 instalar para el chrome en https://chrome.google.com/webstore/category/extensions?hl=es-419 reac revtools
 Esto muestra ma maquetacion en vase a ECMAScript6

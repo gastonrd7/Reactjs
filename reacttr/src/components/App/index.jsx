@@ -7,21 +7,27 @@ import styles from './app.css'
 import Header from '../Header'
 import Main from '../Main'
 import Profile from '../Profile'
+import Login from '../Login'
 
 class App extends Component{
     constructor(){
         super()
         this.state = {
-            user: {
+            user: //null
+            {
                 photoURL: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
                 email: 'gaston.rd7@gmail.com',
                 displayName: 'Gaston Ruiz Diaz',
                 location: 'Buenos Aires, Argentina'
             }
         }
+
+        this.handleOnAuth = this.handleOnAuth.bind(this)
     }
 
-    
+    handleOnAuth () {
+        console.log('llego')
+    }
 
     render () {
 
@@ -32,7 +38,7 @@ class App extends Component{
         return (
             <Router>
                 <div>
-                    <Header />
+                    <Header user={this.state.user}/>
                     <Switch>
                         <Route exact path='/' render={() => {
                             if (this.state.user){
@@ -40,7 +46,11 @@ class App extends Component{
                                     <Main user={this.state.user} />
                                 )
                             } else {
-                                // render <login />
+                                return (
+                                    <Login 
+                                        onAuth={this.handleOnAuth}
+                                    />
+                                )
                             }
                         }} /> 
                         

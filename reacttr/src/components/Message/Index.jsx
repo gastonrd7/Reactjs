@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import styles from './message.css'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+
+//no me toma los warnings si algo anda mal con esto, volver a ver en algun momento
+const propTypes = {
+    onFavorite: PropTypes.func.isRequired,
+    onRetweet: PropTypes.func.isRequired,
+    onReplyTweet: PropTypes.func.isRequired,
+    pressRetweet: PropTypes.func.isRequired,
+    pressFavorite: PropTypes.func.isRequired,
+    date: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired 
+}
 
 class Message extends Component {
     constructor(props) {
@@ -40,7 +54,7 @@ class Message extends Component {
                             <img className={styles.avatar} src={this.props.picture} />
                         </figure>
                     </Link>
-                    <span className={styles.displayName}>{this.props.displayName} </span>
+                    <span className={styles.displayNameStyle}>{this.props.displayName} </span>
                     <span className={styles.username}>{this.props.username} </span>
                     <span className={styles.date}>{dateFormat} </span>
                 </div>
@@ -71,5 +85,19 @@ class Message extends Component {
         )
     }
 }
+
+Message.propTypes = propTypes
+// Message.propTypes = {
+//     onFavorite: PropTypes.func.isRequired,
+//     onRetweet: PropTypes.func.isRequired, 
+//     date: PropTypes.number.isRequired,
+//     username: PropTypes.string.isRequired,
+//     picture: PropTypes.string.isRequired,
+//     displayName: PropTypes.string.isRequired,
+//     onReplyTweet: PropTypes.func.isRequired,
+//     pressRetweet: PropTypes.func.isRequired,
+//     pressFavorite: PropTypes.func.isRequired
+    
+// };
 
 export default Message
