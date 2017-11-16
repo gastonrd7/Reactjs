@@ -170,6 +170,7 @@ class Main extends Component {
                     //no sabe a cual hace referencia
                     //por eso se hace un bind de este handle con el this de este componente
                     onOpenText= {this.handleOpenText} 
+                    onLogout={() => this.props.onLogout()}
                 />
                 {this.renderOpenText()}
                 <MessageList 

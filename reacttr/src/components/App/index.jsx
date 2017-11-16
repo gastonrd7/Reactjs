@@ -8,32 +8,59 @@ import Header from '../Header'
 import Main from '../Main'
 import Profile from '../Profile'
 import Login from '../Login'
+import firebase from 'firebase'
 
 class App extends Component{
     constructor(){
         super()
         this.state = {
-            user: //null
-            {
-                photoURL: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
-                email: 'gaston.rd7@gmail.com',
-                displayName: 'Gaston Ruiz Diaz',
-                location: 'Buenos Aires, Argentina'
-            }
+            user: null
+            // {
+            //     photoURL: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
+            //     email: 'gaston.rd7@gmail.com',
+            //     displayName: 'Gaston Ruiz Diaz',
+            //     location: 'Buenos Aires, Argentina'
+            // }
         }
 
         this.handleOnAuth = this.handleOnAuth.bind(this)
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleOnAuth () {
-        console.log('llego')
+     //componente de cicloo de vida, se dispara una vez el componenete es renderizado en el cliente y todo el DOM se creo
+  componentWillMount (){
+      //buen lugar para apllicar librerias externas
+      // este escuchador se va a disparar cada vez que se conecte o se desconecte el usuario "onAuthStateChanged"
+    firebase.auth().onAuthStateChanged(user => {
+        if(user) {
+            this.setState({
+                //user: user ...si la clave y el valor son iguales, lo escribimos una unica vez
+                user
+              });
+        }  else
+        {
+            this.setState({
+                user: null
+            })
+        }
+    });
+  }
+
+    handleOnAuth(){
+        const provider = new firebase.auth.GithubAuthProvider();
+    
+        firebase.auth().signInWithPopup(provider)
+        .then(result => console.log(`${result.user.email} ha iniciado session`))
+        .catch(error => console.log(`${error.code}: ${error.message}`));
+    }
+    
+      handleLogout() {
+        firebase.auth().signOut()
+        .then(result => console.log(`El usuario ha salido`))
+        .catch(error => console.log(`${error.code}: ${error.message}`));
     }
 
     render () {
-
-        // let PrimaryLayout = props => (
-        //        <Main user={this.state.user} />
-        //     );
 
         return (
             <Router>
@@ -43,7 +70,10 @@ class App extends Component{
                         <Route exact path='/' render={() => {
                             if (this.state.user){
                                 return (
-                                    <Main user={this.state.user} />
+                                    <Main 
+                                        user={this.state.user}
+                                        onLogout={this.handleLogout} 
+                                    />
                                 )
                             } else {
                                 return (
