@@ -3,6 +3,7 @@ import uuid from 'uuid'
 import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
+import firebase from 'firebase'
 
 class Main extends Component {
     //Cuando cambiamos el stado de los componentes
@@ -23,26 +24,26 @@ class Main extends Component {
             openText: false,
             userNameToReply: '',
             messages: [
-                       {
-                           id: uuid.v4(),
-                           text: 'Este es el comentario a leer',
-                           picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
-                           displayName: 'Gastiiii',
-                           username: 'gastonrd7',
-                           date: Date.now() - 180000,
-                           retweets: 0,
-                           favorites: 0
-                        },
-                         {
-                           id: uuid.v4(),
-                           text: 'Este es  un nuevo Mensaje',
-                           picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
-                           displayName: 'Gastiiii',
-                           username: 'gastonrd7',
-                           date: Date.now() - 100000,
-                           retweets: 0,
-                           favorites: 0
-                        }
+                    //    {
+                    //        id: uuid.v4(),
+                    //        text: 'Este es el comentario a leer',
+                    //        picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
+                    //        displayName: 'Gastiiii',
+                    //        username: 'gastonrd7',
+                    //        date: Date.now() - 180000,
+                    //        retweets: 0,
+                    //        favorites: 0
+                    //     },
+                    //      {
+                    //        id: uuid.v4(),
+                    //        text: 'Este es  un nuevo Mensaje',
+                    //        picture: 'https://lh6.googleusercontent.com/-o2eodIl4xGo/AAAAAAAAAAI/AAAAAAAAAVc/Qf6DMl0XM9U/s56-c-k-no/photo.jpg',
+                    //        displayName: 'Gastiiii',
+                    //        username: 'gastonrd7',
+                    //        date: Date.now() - 100000,
+                    //        retweets: 0,
+                    //        favorites: 0
+                    //     }
                    ]
         }
 
@@ -52,6 +53,20 @@ class Main extends Component {
         this.handleRetweet = this.handleRetweet.bind(this)
         this.handleFavorite = this.handleFavorite.bind(this)
         this.handleReplyTweet = this.handleReplyTweet.bind(this)
+    }
+
+    componentWillMount (){
+        //hacemos referencia a nuestra BD y a messages
+        const messageRef = firebase.database().ref().child('messages')
+
+        //cada vez que se haga un insert a a este hacemos una captura y alteramos el estado de este componente
+        //la propiedad messages
+        messageRef.on('child_added', snapshot => {
+            this.setState({
+                messages: this.state.messages.concat(snapshot.val()),
+                openText: false
+            })
+        })
     }
 
     handleSendText (event) {
@@ -68,14 +83,10 @@ class Main extends Component {
                 favorites: 0
             }
 
-            this.setState({
-                //No usar la funcion push que hace mutar el estado, para luego 
-                //usar redax debemos hacerlo con concat
-                //messasges: messages.push(newMessage)
-                 messages: this.state.messages.concat([newMessage]),
-                 openText: false,
-                 userNameToReply: ''
-            })
+            const messageRef = firebase.database().ref().child('messages')
+            const messageID = messageRef.push()
+            messageID.set(newMessage)
+
         }
 
     handleCloseText (event) {
