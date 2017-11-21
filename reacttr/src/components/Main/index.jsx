@@ -62,11 +62,22 @@ class Main extends Component {
         //cada vez que se haga un insert a a este hacemos una captura y alteramos el estado de este componente
         //la propiedad messages
         messageRef.on('child_added', snapshot => {
-            this.setState({
-                messages: this.state.messages.concat(snapshot.val()),
-                openText: false
-            })
+            store.dispatch(cargarMensajes(this.state.messages.concat(snapshot.val())));
+            store.dispatch(cargarEstadoCajaTexto(false));
+            // this.setState({
+            //     messages: this.state.messages.concat(snapshot.val()),
+            //     openText: false
+            // })
         })
+
+        store.subscribe(() => {
+            this.setState({
+                openText: store.getState().openText,
+                userNameToReply: store.getState().userNameToReply,
+                messages: store.getState().messages
+                })
+            })
+
     }
 
     handleSendText (event) {

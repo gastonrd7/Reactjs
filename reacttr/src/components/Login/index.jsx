@@ -16,6 +16,12 @@ class Login extends Component {
                 >
                 <span className='fa fa-github' />Login con GitHub
                 </button>
+                <button
+                    onClick={this.props.onAuthG}
+                    className={styles.button}
+                >
+                <span className='fa fa-google-plus' />Login con Google
+                </button>
             </div>
         )
     }

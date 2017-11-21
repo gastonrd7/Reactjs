@@ -51,7 +51,10 @@ npm install --save uuid (cuando react maneja listas pide que se cargue la key de
 npm install --save redux
 --npm install --save react-router@4.0.0-alpha.4
 npm install --save react-router
-
+firebase login
+firebase init (luego configurar segun lo que necesitemos, bd no, y hosting si), luego asociamos el proyecto a la carpeta...poner build como directorio publico...que no sea una SPA
+npm run production (para que haga la subida y salida de los archivos en build)										
+firebase deploy (para que suba a nuestro hosting, esto toma los archivos de salida de build y los sube)
 
 
 instalar para el chrome en https://chrome.google.com/webstore/category/extensions?hl=es-419 reac revtools

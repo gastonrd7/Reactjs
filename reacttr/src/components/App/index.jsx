@@ -9,6 +9,8 @@ import Main from '../Main'
 import Profile from '../Profile'
 import Login from '../Login'
 import firebase from 'firebase'
+import store from '../../redux/store';
+import { cargarUsuario } from '../../redux/actionCreators';
 
 class App extends Component{
     constructor(){
@@ -24,26 +26,36 @@ class App extends Component{
         }
 
         this.handleOnAuth = this.handleOnAuth.bind(this)
-        this.handleLogout = this.handleLogout.bind(this);
+        this.handleOnAuthGoogle = this.handleOnAuthGoogle.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
      //componente de cicloo de vida, se dispara una vez el componenete es renderizado en el cliente y todo el DOM se creo
   componentWillMount (){
       //buen lugar para apllicar librerias externas
       // este escuchador se va a disparar cada vez que se conecte o se desconecte el usuario "onAuthStateChanged"
+    
     firebase.auth().onAuthStateChanged(user => {
         if(user) {
-            this.setState({
-                //user: user ...si la clave y el valor son iguales, lo escribimos una unica vez
-                user
-              });
+            store.dispatch(cargarUsuario(user));
+            // this.setState({
+            //     user: user
+            // })
         }  else
         {
-            this.setState({
-                user: null
-            })
+            store.dispatch(cargarUsuario(user));
+            //  this.setState({
+            //      user: null
+            //  })
         }
     });
+
+    store.subscribe(() => {
+      this.setState({
+        user: store.getState().user
+      })
+    })
+
   }
 
     handleOnAuth(){
@@ -51,6 +63,14 @@ class App extends Component{
     
         firebase.auth().signInWithPopup(provider)
         .then(result => console.log(`${result.user.email} ha iniciado session`))
+        .catch(error => console.log(`${error.code}: ${error.message}`));
+    }
+
+    handleOnAuthGoogle(){
+        const provider = new firebase.auth.GoogleAuthProvider();
+    
+        firebase.auth().signInWithPopup(provider)
+        .then(result => console.log(`${result.user.email} ha iniciado session con google`))
         .catch(error => console.log(`${error.code}: ${error.message}`));
     }
     
@@ -79,6 +99,7 @@ class App extends Component{
                                 return (
                                     <Login 
                                         onAuth={this.handleOnAuth}
+                                        onAuthG={this.handleOnAuthGoogle}
                                     />
                                 )
                             }
