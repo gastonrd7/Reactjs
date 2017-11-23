@@ -1,3 +1,7 @@
+como usar redux
+http://es.redux.js.org/docs/api/create-store.html
+http://es.redux.js.org/docs/api/Store.html
+
 FireBase
 Subida de archivos (imagenes)
 Subida de registros.
@@ -10,6 +14,9 @@ node -v
 
 2)Generador de aplicaciones de react de forma global (-g):
 cambiar de disco C: o E: --- cd "xxx" donde querramos generarlo
+
+
+
 Esto genera los paquetes (la palntilla de cualquier aplicacion que creeemos)
 npm install -g create-react-app
 
