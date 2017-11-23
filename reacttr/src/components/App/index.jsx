@@ -28,6 +28,12 @@ class App extends Component{
         this.handleOnAuth = this.handleOnAuth.bind(this)
         this.handleOnAuthGoogle = this.handleOnAuthGoogle.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+
+        store.subscribe(() => {
+        this.setState({
+            user: store.getState().user
+            })
+        })
     }
 
      //componente de cicloo de vida, se dispara una vez el componenete es renderizado en el cliente y todo el DOM se creo
@@ -43,18 +49,14 @@ class App extends Component{
             // })
         }  else
         {
-            store.dispatch(cargarUsuario(user));
+            store.dispatch(cargarUsuario(null));
             //  this.setState({
             //      user: null
             //  })
         }
     });
 
-    store.subscribe(() => {
-      this.setState({
-        user: store.getState().user
-      })
-    })
+
 
   }
 
@@ -74,7 +76,10 @@ class App extends Component{
         .catch(error => console.log(`${error.code}: ${error.message}`));
     }
     
-      handleLogout() {
+    handleLogout() {
+        console.log(store.getState().numero)
+        console.log(store.getState().user)
+
         firebase.auth().signOut()
         .then(result => console.log(`El usuario ha salido`))
         .catch(error => console.log(`${error.code}: ${error.message}`));
