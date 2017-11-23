@@ -4,6 +4,9 @@ import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
 import firebase from 'firebase'
+import storeMensajes from '../../redux/storeMensajes'
+import { cargarMensajes } from '../../redux/actionCreators'
+
 
 class Main extends Component {
     //Cuando cambiamos el stado de los componentes
@@ -33,7 +36,7 @@ class Main extends Component {
                     //        date: Date.now() - 180000,
                     //        retweets: 0,
                     //        favorites: 0
-                    //     },
+                    //     }
                     //      {
                     //        id: uuid.v4(),
                     //        text: 'Este es  un nuevo Mensaje',
@@ -53,6 +56,24 @@ class Main extends Component {
         this.handleRetweet = this.handleRetweet.bind(this)
         this.handleFavorite = this.handleFavorite.bind(this)
         this.handleReplyTweet = this.handleReplyTweet.bind(this)
+
+        // let newMessage = {
+        //         id: uuid.v4(),
+        //         username: this.props.user.email.split('@')[0],
+        //         displayName: this.props.user.displayName,
+        //         picture: this.props.user.photoURL,
+        //         date: Date.now(),
+        //         text: 'pruebaaa',
+        //         retweets: 0,
+        //         favorites: 0
+        //     }
+        // storeMensajes.dispatch(cargarMensajes(newMessage));
+
+        console.log('del store1')
+        console.log(storeMensajes.getState().listmessages)
+        console.log('del estado1')
+        console.log(this.state.messages)
+
     }
 
     componentWillMount (){
@@ -62,21 +83,26 @@ class Main extends Component {
         //cada vez que se haga un insert a a este hacemos una captura y alteramos el estado de este componente
         //la propiedad messages
         messageRef.on('child_added', snapshot => {
-            store.dispatch(cargarMensajes(this.state.messages.concat(snapshot.val())));
-            store.dispatch(cargarEstadoCajaTexto(false));
-            // this.setState({
-            //     messages: this.state.messages.concat(snapshot.val()),
-            //     openText: false
-            // })
+             storeMensajes.dispatch(cargarMensajes(snapshot.val()));
+            // store.dispatch(cargarEstadoCajaTexto(false));
+            this.setState({
+                //messages: this.state.messages.concat(snapshot.val()),
+                openText: false
+            })
         })
 
-        store.subscribe(() => {
+        storeMensajes.subscribe(() => {
             this.setState({
-                openText: store.getState().openText,
-                userNameToReply: store.getState().userNameToReply,
-                messages: store.getState().messages
+                //openText: store.getState().openText,
+                //userNameToReply: store.getState().userNameToReply,
+                messages: storeMensajes.getState().listmessages
                 })
             })
+        
+        console.log('del store')
+        console.log(storeMensajes.getState().listmessages)
+        console.log('del estado')
+        console.log(this.state.messages)
 
     }
 
@@ -97,6 +123,11 @@ class Main extends Component {
             const messageRef = firebase.database().ref().child('messages')
             const messageID = messageRef.push()
             messageID.set(newMessage)
+
+            console.log('del store')
+            console.log(storeMensajes.getState().listmessages)
+            console.log('del estado')
+            console.log(this.state.messages)
 
         }
 

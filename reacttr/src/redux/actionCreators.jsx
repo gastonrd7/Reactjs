@@ -5,4 +5,11 @@ const cargarUsuario = user => {
     }
 };
 
-export {cargarUsuario};
+const cargarMensajes = mensajesssss => {
+    return {
+      type: "cargar_mensajes",
+      mensajesssss
+    }
+};
+
+export {cargarUsuario, cargarMensajes};

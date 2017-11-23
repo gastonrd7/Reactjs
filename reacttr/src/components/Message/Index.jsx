@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom'
 const propTypes = {
     onFavorite: PropTypes.func.isRequired,
     onRetweet: PropTypes.func.isRequired,
-    onReplyTweet: PropTypes.func.isRequired,
-    pressRetweet: PropTypes.func.isRequired,
-    pressFavorite: PropTypes.func.isRequired,
+    //onReplyTweet: PropTypes.func.isRequired,
+    //pressRetweet: PropTypes.func.isRequired,
+    //pressFavorite: PropTypes.func.isRequired,
     date: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
