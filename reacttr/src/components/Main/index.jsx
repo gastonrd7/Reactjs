@@ -121,19 +121,26 @@ class Main extends Component {
 
     handleCloseText (event) {
             event.preventDefault()
-            reducerText.dispatch(cargarEstadoCajaTexto(false))
-            reducerReply.dispatch(cargarNombreAReplicar(''))
-            //this.setState( {openText: false, userNameToReply : ''} )
+            // reducerText.dispatch(cargarEstadoCajaTexto(false))
+            // reducerReply.dispatch(cargarNombreAReplicar(''))
+            this.setState( {openText: false, userNameToReply : ''} )
         }
 
     handleOpenText (event) {
+            console.log('handleOpenText')
             event.preventDefault()
             //al cambiar openText a true, y esta propiedad esta en estado del 
             //componente, forzamos el metodo render nuevamente a ejecutarse
-            reducerText.dispatch(cargarEstadoCajaTexto(false))
-            // this.setState({ 
-            //     openText: true
-            // })
+
+            // reducerText.dispatch(cargarEstadoCajaTexto(true))
+            // reducerMensajes.subscribe(() => {
+            //     this.setState({
+            //         openText: reducerText.getState().openText,
+            //         })
+            //     })
+            this.setState({ 
+                openText: true
+            })
 
         }
     
@@ -193,6 +200,7 @@ class Main extends Component {
         }
 
     renderOpenText(){
+        console.log('renderOpenText')
         if(this.state.openText){
             return (
                 <InputText
