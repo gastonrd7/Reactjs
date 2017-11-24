@@ -1,14 +1,8 @@
 Jueves/viernes 12:11 hs es estado de redux es.
 
-El fenomeno que pasa con el retweet es loco:
-hago una copia del reducer, y a ese le pongo retweet.
-como no hago una actualizacion de estado del usuario, no pasa nada.
-
-Pero como el favorito si actualiza el estado del usuario, aparentemente esto dispara a cambiar el estado del padre,
-que aparentemente cada cambio genera un dispatch y cambia el estado del reduce, por tal motivo en ese momento.
-el usuario de este componente (main) toma el valor de retweet en 1.
-
-Debo seguir haciendo pruebas.
+Debo ponerle al usuario que voy a loguear en el reducer, todas las propiedades que le van a corresponder, sino despues tengo que agregarle propiedades por el camino y se me rompe
+la aplicacion.
+porque las propiedades agregadas son del estado del componenete, y no del usuario que fue pasado, y que vamos a usar con el reducer
 
 
 como usar redux
