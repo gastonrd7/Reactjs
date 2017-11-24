@@ -4,8 +4,11 @@ import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
 import firebase from 'firebase'
-import storeMensajes from '../../redux/storeMensajes'
-import { cargarMensajes } from '../../redux/actionCreators'
+import reducerMensajes from '../../redux/reducerMensajes'
+import reducerText from '../../redux/reducerText'
+import reducerReply from '../../redux/reducerReply'
+import reducerUser from '../../redux/reducerReply'
+import { cargarMensajes, cargarEstadoCajaTexto, cargarNombreAReplicar, reemplazarMensajes } from '../../redux/actionCreators'
 
 
 class Main extends Component {
@@ -67,12 +70,7 @@ class Main extends Component {
         //         retweets: 0,
         //         favorites: 0
         //     }
-        // storeMensajes.dispatch(cargarMensajes(newMessage));
-
-        console.log('del store1')
-        console.log(storeMensajes.getState().listmessages)
-        console.log('del estado1')
-        console.log(this.state.messages)
+        // reducerMensajes.dispatch(cargarMensajes(newMessage));
 
     }
 
@@ -83,26 +81,22 @@ class Main extends Component {
         //cada vez que se haga un insert a a este hacemos una captura y alteramos el estado de este componente
         //la propiedad messages
         messageRef.on('child_added', snapshot => {
-             storeMensajes.dispatch(cargarMensajes(snapshot.val()));
-            // store.dispatch(cargarEstadoCajaTexto(false));
-            this.setState({
-                //messages: this.state.messages.concat(snapshot.val()),
-                openText: false
-            })
+             reducerMensajes.dispatch(cargarMensajes(snapshot.val()));
+             reducerText.dispatch(cargarEstadoCajaTexto(false));
+            // this.setState({
+            //     messages: this.state.messages.concat(snapshot.val()),
+            //     openText: false
+            // })
         })
 
-        storeMensajes.subscribe(() => {
+        reducerMensajes.subscribe(() => {
             this.setState({
-                //openText: store.getState().openText,
-                //userNameToReply: store.getState().userNameToReply,
-                messages: storeMensajes.getState().listmessages
+                openText: reducerText.getState().openText,
+                userNameToReply: reducerReply.getState().userNameToReply,
+                messages: reducerMensajes.getState().listmessages
                 })
             })
         
-        console.log('del store')
-        console.log(storeMensajes.getState().listmessages)
-        console.log('del estado')
-        console.log(this.state.messages)
 
     }
 
@@ -123,49 +117,53 @@ class Main extends Component {
             const messageRef = firebase.database().ref().child('messages')
             const messageID = messageRef.push()
             messageID.set(newMessage)
-
-            console.log('del store')
-            console.log(storeMensajes.getState().listmessages)
-            console.log('del estado')
-            console.log(this.state.messages)
-
         }
 
     handleCloseText (event) {
             event.preventDefault()
-            this.setState( {openText: false, userNameToReply : ''} )
+            reducerText.dispatch(cargarEstadoCajaTexto(false))
+            reducerReply.dispatch(cargarNombreAReplicar(''))
+            //this.setState( {openText: false, userNameToReply : ''} )
         }
 
     handleOpenText (event) {
             event.preventDefault()
             //al cambiar openText a true, y esta propiedad esta en estado del 
             //componente, forzamos el metodo render nuevamente a ejecutarse
-            this.setState({ 
-                openText: true
-            })
+            reducerText.dispatch(cargarEstadoCajaTexto(false))
+            // this.setState({ 
+            //     openText: true
+            // })
 
         }
     
     handleRetweet (msgId) {
              let alreadyRetweet = this.state.user.retweets.filter(rt => rt == msgId)
             if(alreadyRetweet.length == 0){
-                let messages = this.state.messages.map(msg => {
+                // let messages = this.state.messages.map(msg => {
+                //     if(msg.id == msgId){
+                //         msg.retweets++
+                //     }
+                //     return msg
+                // })
+                let messages = reducerMensajes.getState().listmessages.map(msg => {
                     if(msg.id == msgId){
                         msg.retweets++
                     }
                     return msg
                 })
+                console.log('llego')
                 
                 //creo un objeto en base a otro tomando todas sus propiedades
-                let user = Object.assign({}, this.state.user)
+                let user = Object.assign({}, reducerUser.getState().user)
+                //let user = Object.assign({}, this.state.user)
                 user.retweets.push(msgId)
-
-                this.setState({
-                    messsages: messages,
-                   //messsages,
-                    user: user
-                    //user
-                })
+                
+                reducerMensajes.dispatch(reemplazarMensajes(messages))
+                //this.setState({
+                    //messsages: messages,
+                //    user: user
+                //})
             }
         }
     

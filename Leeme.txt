@@ -1,3 +1,16 @@
+Jueves/viernes 12:11 hs es estado de redux es.
+
+El fenomeno que pasa con el retweet es loco:
+hago una copia del reducer, y a ese le pongo retweet.
+como no hago una actualizacion de estado del usuario, no pasa nada.
+
+Pero como el favorito si actualiza el estado del usuario, aparentemente esto dispara a cambiar el estado del padre,
+que aparentemente cada cambio genera un dispatch y cambia el estado del reduce, por tal motivo en ese momento.
+el usuario de este componente (main) toma el valor de retweet en 1.
+
+Debo seguir haciendo pruebas.
+
+
 como usar redux
 http://es.redux.js.org/docs/api/create-store.html
 http://es.redux.js.org/docs/api/Store.html

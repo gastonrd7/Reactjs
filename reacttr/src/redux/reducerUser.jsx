@@ -3,12 +3,14 @@ import { createStore } from 'redux'
 const reducer = (state, action) => {
     if (action.type === "cargar_usuario"){
         return {
-            state: state,
             user: action.user,
-            numero: 1
+        }   
+    } else if (action.type === "actualizar_usuario"){
+        return {
+            user: action.usuarioo,
         }   
     }
     return state;
 }
 
-export default createStore(reducer, [{ user: [] }, { numero: 0 }]) 
+export default createStore(reducer, { user: [] }) 

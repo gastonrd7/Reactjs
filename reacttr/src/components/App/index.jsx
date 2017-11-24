@@ -9,7 +9,7 @@ import Main from '../Main'
 import Profile from '../Profile'
 import Login from '../Login'
 import firebase from 'firebase'
-import store from '../../redux/store';
+import reducerUser from '../../redux/reducerUser';
 import { cargarUsuario } from '../../redux/actionCreators';
 
 class App extends Component{
@@ -29,9 +29,9 @@ class App extends Component{
         this.handleOnAuthGoogle = this.handleOnAuthGoogle.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
 
-        store.subscribe(() => {
+        reducerUser.subscribe(() => {
         this.setState({
-            user: store.getState().user
+            user: reducerUser.getState().user
             })
         })
     }
@@ -43,13 +43,13 @@ class App extends Component{
     
     firebase.auth().onAuthStateChanged(user => {
         if(user) {
-            store.dispatch(cargarUsuario(user));
+            reducerUser.dispatch(cargarUsuario(user));
             // this.setState({
             //     user: user
             // })
         }  else
         {
-            store.dispatch(cargarUsuario(null));
+            reducerUser.dispatch(cargarUsuario(null));
             //  this.setState({
             //      user: null
             //  })
@@ -69,6 +69,7 @@ class App extends Component{
     }
 
     handleOnAuthGoogle(){
+        console.log(reducerUser.getState().user)
         const provider = new firebase.auth.GoogleAuthProvider();
     
         firebase.auth().signInWithPopup(provider)
@@ -77,9 +78,7 @@ class App extends Component{
     }
     
     handleLogout() {
-        console.log(store.getState().numero)
-        console.log(store.getState().user)
-
+        console.log(reducerUser.getState().user)
         firebase.auth().signOut()
         .then(result => console.log(`El usuario ha salido`))
         .catch(error => console.log(`${error.code}: ${error.message}`));

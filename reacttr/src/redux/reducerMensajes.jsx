@@ -6,6 +6,11 @@ const reducer = (state, action) => {
         listmessages: state.listmessages.concat(action.mensajesssss)
         }   
     }
+    else if (action.type === "reemplazar_mensajes"){
+        return {
+        listmessages: action.mensajess
+        }   
+    }
     return state;
 }
 
