@@ -156,8 +156,11 @@ class Main extends Component {
                 
                 //creo un objeto en base a otro tomando todas sus propiedades
                 let user = Object.assign({}, reducerUser.getState().user)
+                console.log(reducerUser.getState().user)
                 //let user = Object.assign({}, this.state.user)
-                user.retweets.push(msgId)
+                //comente esto porque sino se rompia y no me reeplazaba los mensajes mas abajo
+                //no le puedo poner que este usuario ya retweet porque el reducer no tiene esta propiedad
+                //user.retweets.push(msgId)
                 
                 reducerMensajes.dispatch(reemplazarMensajes(messages))
                 //this.setState({

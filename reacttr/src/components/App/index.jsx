@@ -43,6 +43,7 @@ class App extends Component{
     
     firebase.auth().onAuthStateChanged(user => {
         if(user) {
+            //let userCompleto = Object.assign({}, user, {retweets: 0}, {favorites: 0})
             reducerUser.dispatch(cargarUsuario(user));
             // this.setState({
             //     user: user
