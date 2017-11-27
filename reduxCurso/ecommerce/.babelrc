@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "react",
+    "stage-2",
+    //dependiendo del soporte que queremos dar, intalar solo cosas puntuales
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7"]
+      },
+      "modules": false //que utilice los de webpack2 y no los de babel
+    }]
+  ]
+}

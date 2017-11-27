@@ -1,3 +1,11 @@
+Se compienza a codificar el nuevo curso de redux
+mkdir ecommerce
+
+    // "react": "^16.0.0",
+    // "react-dom": "^16.0.0",
+    // "react-router": "^4.2.0",
+    // "react-router-dom": "^4.1.1",
+
 Jueves/viernes 12:11 hs es estado de redux es.
 
 Debo ponerle al usuario que voy a loguear en el reducer, todas las propiedades que le van a corresponder, sino despues tengo que agregarle propiedades por el camino y se me rompe
