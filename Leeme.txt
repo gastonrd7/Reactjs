@@ -1,3 +1,4 @@
+yarn add babel-polyfill
 Se compienza a codificar el nuevo curso de redux
 mkdir ecommerce
 
