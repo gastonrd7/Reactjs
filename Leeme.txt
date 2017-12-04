@@ -1,4 +1,7 @@
+
+
 yarn add babel-polyfill
+yarn add --dev webpack-dev-server@2.4.0
 Se compienza a codificar el nuevo curso de redux
 mkdir ecommerce
 
@@ -49,6 +52,9 @@ Instalar firebase en nuestro directorio de la aplciacion, asi nos lo agrega como
 npm install --save firebase
 
 Documentacion de firebase autenticacion : https://firebase.google.com/docs/auth/users?authuser=0
+
+npm run dev
+npm start (depende de lo que pusimos en scrips)
 
 En el directorio creado poner
 npm init

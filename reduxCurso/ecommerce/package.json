@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Gaston Ruiz Diaz",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server -w"
+  },
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-eslint": "7.1.1",

@@ -7,7 +7,9 @@ import cart from './cartReducer';
 
 const rootReducer = combineReducers ({
     routing: routerReducer,
-    productLIstReducer,
+    productList,
     activeProduct,
     cart
 })
+
+export default rootReducer

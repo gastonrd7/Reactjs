@@ -53,7 +53,8 @@ export function saveProductFailure(error){
     }
 }
 
-// a estos metodos seguramente va a llamar los componentes
+// a estos metodos seguramente va a llamar los componentes,
+// pero el dispatch lo hacen dentro de estos actions, gran diferencia
 //actions creators (async)
 export function fetchProducts(){
     return async (dispatch => {

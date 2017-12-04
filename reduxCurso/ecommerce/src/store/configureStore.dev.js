@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 //nos poermite utilizar la extension de chrome redux dev tools
 //nos permite ir hacia delante y hacia atras en el tiempo, segun el estado de nuestra aplicacion
@@ -12,9 +12,9 @@ import rootReducer from '../reducers';
 //asincronas
 const enhancer = composeWithDevTools(
   //el orden es importante, porque se van a ir ejecutando segun esten colocados aca
-  applyMiddleware(thunk, logger())
+  applyMiddleware(thunk, createLogger())
 );
 
-export default function configureStore (initialState) {
+export default function configureStore(initialState) {
   return createStore(rootReducer, initialState, enhancer);
 };
