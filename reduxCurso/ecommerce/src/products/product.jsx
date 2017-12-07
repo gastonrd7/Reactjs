@@ -10,7 +10,7 @@ const Product = ({
   image,
   price,
   deliveryStimate,
-  category,
+  category,  
   onAddItem
 }) => (
   <div className="col-xs-12 col-sm-6 col-lg-4">
