@@ -57,7 +57,7 @@ export function saveProductFailure(error){
 // pero el dispatch lo hacen dentro de estos actions, gran diferencia
 //actions creators (async)
 export function fetchProducts(){
-    return async (dispatch => {
+    return async (dispatch) => {
         dispatch(() => {
             return {
                 type: FETCH_PRODUCTS_INIT
@@ -65,15 +65,15 @@ export function fetchProducts(){
         })
 
         try {
-            const data = await api.products.getAll()
-            return dispatch(saveProductSuccess(data.products))
+            const data = await Api.products.getAll()
+            return dispatch(fetchProductsSuccess(data.products))
         } catch (error) {
             return dispatch(fetchProductsFailure(error))
         }
-    })
+    }
 }
 export function fetchProduct(productId){
-    return async (dispatch => {
+    return async (dispatch) => {
         dispatch(() => {
             return {
                 type: FETCH_PRODUCT_INIT
@@ -81,15 +81,15 @@ export function fetchProduct(productId){
         })
 
         try {
-            const data = await api.products.getSingle(productId)
+            const data = await Api.products.getSingle(productId)
             return dispatch(fetchProductSuccess(data.product))
         } catch (error) {
             return dispatch(fetchProductFailure(error))
         }
-    })
+    }
 }
 export function saveProduct(product){
-    return async (dispatch => {
+    return async (dispatch) => {
         dispatch(() => {
             return {
                 type: SAVE_PRODUCT_INIT
@@ -97,10 +97,10 @@ export function saveProduct(product){
         })
 
         try {
-            await api.products.save(product)
+            await Api.products.save(product)
             return dispatch(saveProductSuccess())
         } catch (error) {
             return dispatch(saveProductFailure(error))
         }
-    })
+    }
 }

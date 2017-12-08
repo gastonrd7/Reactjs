@@ -8,7 +8,8 @@ const Api = {
         // getAll: function getAll() {
         //     //vamos a utilizar las promesas pero utilizando async await
         // }
-        async getAll:  function getAll(){
+        
+        async getAll(){
             //en ves de utilizar el fetch(`${baseUrl}/products`).then como promesa convencional
             //usamos el await que dice que cuando termine lo guarde en la constante response
             // para poder usar await debemos usar async delante de la funcion que estamos llamando

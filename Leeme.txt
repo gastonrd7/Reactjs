@@ -1,22 +1,3 @@
-
-
-yarn add babel-polyfill
-yarn add --dev webpack-dev-server@2.4.0
-Se compienza a codificar el nuevo curso de redux
-mkdir ecommerce
-
-    // "react": "^16.0.0",
-    // "react-dom": "^16.0.0",
-    // "react-router": "^4.2.0",
-    // "react-router-dom": "^4.1.1",
-
-Jueves/viernes 12:11 hs es estado de redux es.
-
-Debo ponerle al usuario que voy a loguear en el reducer, todas las propiedades que le van a corresponder, sino despues tengo que agregarle propiedades por el camino y se me rompe
-la aplicacion.
-porque las propiedades agregadas son del estado del componenete, y no del usuario que fue pasado, y que vamos a usar con el reducer
-
-
 como usar redux
 http://es.redux.js.org/docs/api/create-store.html
 http://es.redux.js.org/docs/api/Store.html
@@ -53,10 +34,8 @@ npm install --save firebase
 
 Documentacion de firebase autenticacion : https://firebase.google.com/docs/auth/users?authuser=0
 
-npm run dev
-npm start (depende de lo que pusimos en scrips)
-
 En el directorio creado poner
+npm run dev
 npm init
 npm install --save-dev (dependencias del entorno de desarrollo)
 npm install --save (dependencias del proyecto unicamente)
