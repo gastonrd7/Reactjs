@@ -4,8 +4,9 @@ import Product from './product'
 import uuid from 'uuid'
 
 const ProductList = ({
-    loading
-    products
+    loading,
+    products,
+    onAddItem
 }) => (
     <section className="container">
     { loading && <span>Cargando datos...</span> }
@@ -14,6 +15,7 @@ const ProductList = ({
         products.map(product => (
           <Product
             key={uuid.v4()}
+            onAddItem={onAddItem}
             {...product}
           />
         ))

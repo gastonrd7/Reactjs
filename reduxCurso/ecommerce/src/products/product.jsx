@@ -10,7 +10,7 @@ const Product = ({
   image,
   price,
   deliveryStimate,
-  category,  
+  category,
   onAddItem
 }) => (
   <div className="col-xs-12 col-sm-6 col-lg-4">
@@ -38,6 +38,7 @@ const Product = ({
       <div className="card-block">
         <button
           className="btn btn-primary"
+          onClick={() => onAddItem({_id,name,description,image,price,deliveryStimate,category})}
         >
           <span className="fa fa-cart-plus" /> Añadir al carrito
         </button>
@@ -48,13 +49,12 @@ const Product = ({
 
 Product.propTypes = {
   _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  deliveryStimate: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  onAddItem: PropTypes.func.isRequired
+  name: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  price: PropTypes.number,
+  deliveryStimate: PropTypes.string
+  //category: PropTypes.string.isRequired
 };
 
 export default Product;
