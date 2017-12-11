@@ -1,4 +1,5 @@
 import React, {Component, PropTypes } from 'react'
+import { Navbar, Grid, Row, Col } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 // componente redux contenedor, o componente funcional, ya que va a menajar estados y comportamiento
@@ -24,11 +25,22 @@ class ProductListContainer extends Component {
 
     render() {
         return (
-            <ProductList
-                loading={this.props.loading}
-                products={this.props.products}
-                onAddItem={this.handleOnAddItem}
-            />
+            <div>
+            <Grid>
+                <Row>
+                    <Col sm={8}>
+                    <ProductList
+                            loading={this.props.loading}
+                            products={this.props.products}
+                            onAddItem={this.handleOnAddItem}
+                        />
+                    </Col>
+                    <Col sm={4}>
+                    
+                    </Col>
+                </Row>
+            </Grid>
+            </div>
         )
     }
 }

@@ -9,6 +9,8 @@ import { Route, IndexRoute } from 'react-router'
 import App from './App'
 import ProductListContainer from './products/ProductListContainer'
 import CartContainer from './cart/cartContainer'
+import ProductDetailContainer from './products/ProductDetailContainer'
+import ProductAddContainer from './products/ProductAddContainer';
 
 //como usamos la rutas anidadas, decimos que 'ProductListContainer' va a estar incrustado en 'App'
 //por eso luego en el componente app, usamos this.props.children para decirle donde va a 
@@ -17,5 +19,10 @@ export default (
     <Route path="/" component={App}>
         <IndexRoute component={ProductListContainer} />
         <Route path="/cart" component={CartContainer} />
+        <Route path="/detail/:productId" component={ProductDetailContainer} />
+        <Route path="/add" component={ProductAddContainer} />
     </Route>
 )
+
+///detail/:productId luego quien lo tome, con ownProps puede acceder a ownProps.params.XXX en este caso,
+//decidimos llamar el parametro productId, entonces para tomar su valor seria ownProps.params.productId
