@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 // componente redux contenedor, o componente funcional, ya que va a menajar estados y comportamiento
 import ProductList from './productList'
+import CartListContainer from '../cart/cartContainer'
 import * as productActions from '../actions/productActions'
 import * as cartActions from '../actions/cartActions'
 
@@ -36,7 +37,7 @@ class ProductListContainer extends Component {
                         />
                     </Col>
                     <Col sm={4}>
-                    
+                    <CartListContainer />
                     </Col>
                 </Row>
             </Grid>
